@@ -364,11 +364,15 @@ pytest -v tests
 
 - **Single-Node SQLite:** SQLite is designed for single-instance applications. For high-concurrency distributed deployments across multiple containers, replace `DATABASE_URL` with a managed database service such as PostgreSQL.
 - **Cloud Hosting & Ephemeral Disks:** When deploying to free-tier cloud platforms (such as Render or Railway), container disks are ephemeral and reset during application sleep or re-deploys. For permanent data retention in production, mount a persistent disk volume or connect to an external hosted SQL database.
+- **Production Settings:** CORS origins can be restricted in production by setting the `ALLOWED_ORIGINS` environment variable (e.g., `ALLOWED_ORIGINS=https://myfrontend.com`).
 - **Render Deployment Blueprint:** A pre-configured `render.yaml` file is included in the project for seamless deployment:
   - **Build Command:** `pip install -r requirements.txt`
   - **Start Command:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+  - **Health Check Path:** `/health`
+- **Full Deployment Walkthrough:** For complete manual setup steps, persistent disk options, and log monitoring, refer to [docs/deployment_guide.md](./docs/deployment_guide.md).
 - **Future Live URL:**
-  `[Future Live URL - To Be Configured After Deployment]` *(This placeholder will be updated with the live hosting link once deployed to a public cloud provider).*
+  `[Future Live URL - To Be Configured After Deployment]` *(This placeholder will be updated with your live Render URL once deployed).*
+
 
 ---
 

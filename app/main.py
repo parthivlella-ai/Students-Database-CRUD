@@ -42,12 +42,18 @@ A robust, production-grade Python backend REST API built with **FastAPI** and **
     lifespan=lifespan,
 )
 
-# Enable CORS for local testing and web frontends
+import os
+
+# Configure CORS origins safely (configurable via ALLOWED_ORIGINS env variable)
+allowed_origins_raw = os.getenv("ALLOWED_ORIGINS", "*")
+allowed_origins = [origin.strip() for origin in allowed_origins_raw.split(",") if origin.strip()]
+
+# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
